@@ -13,9 +13,14 @@ NEG_ONE_COMMENT = ':-1:'
 
 # Setup our clients
 before do
-  uri = URI.parse(REDIS_URI) 
+  uri = URI.parse(REDIS_URI)
   @redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
   @client ||= Octokit::Client.new(:access_token => ACCESS_TOKEN)
+end
+
+# Endpoint to check if service is up
+get '/' do
+  'OK'
 end
 
 # Webhook endpoint
